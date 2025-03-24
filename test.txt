@@ -1,0 +1,65 @@
+POST http://127.0.0.1:5000/signup
+Body (JSON):
+{
+  "username": "menna",
+  "password": "menna123"
+}
+run:{
+    "message": "User registered successfully",
+    "twofa_secret": "KWS76EKPU2JVVWYWGQB6HKHOXJY6LHP2"
+}
+------------------------------------------------
+GET http://127.0.0.1:5000/2fa_qr/menna?mode=file
+-----------
+POST http://127.0.0.1:5000/login
+{
+    "username": "menna",
+    "password": "menna123",
+    "2fa_code": "code_Google_Authenticator"
+}
+run:{
+    "access_token": "eyJ0eXAiOiJKV1Q..."
+}
+---------------------------------------
+POST http://127.0.0.1:5000/products
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+{
+    "name": "Laptop",
+    "description": "Dell Inspiron",
+    "price": 1200.50,
+    "quantity": 5
+}
+run:
+{
+    "message": "Product added successfully"
+}
+----------------------------------------
+GET: http://127.0.0.1:5000/products
+
+run:[
+    {
+        "description": "Dell Inspiron",
+        "id": 1,
+        "name": "Laptop",
+        "price": 1200.5,
+        "quantity": 5
+    }
+]
+----------------------------------------
+
+PUT http://127.0.0.1:5000/products/1
+{
+    "price": 1100.00,
+    "quantity": 3
+}
+
+run:{
+    "message": "Product updated successfully"
+}
+---------------------------------------------------
+DELETE: http://127.0.0.1:5000/products/1
+{
+    "message": "Product deleted successfully"
+}
